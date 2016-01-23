@@ -46,5 +46,18 @@ public class IntakeWrist extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
+    /**
+     * Energize the jazz hands or extend the intake wrist.
+     */
+    public void intakeExtend() {
+    	intakeWristSolenoid.set(true);
+    }
+    /**
+     * De-energize the jazz hands or extend the intake wrist.
+     */
+    public void intakeRetract() {
+    	intakeWristSolenoid.set(false);
+    }
+    
 }
 
