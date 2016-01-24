@@ -92,7 +92,7 @@ public class OI {
         intake.whileHeld(new intake_ActivateMotors(0));
         driverJoystick = new Joystick(0);
         
-        driveWithGyro = new JoystickButton(driverJoystick, 1);
+        driveWithGyro = new JoystickButton(driverJoystick, 5);
         driveWithGyro.whileHeld(new chassis_DriveWithGyro());
 
 
