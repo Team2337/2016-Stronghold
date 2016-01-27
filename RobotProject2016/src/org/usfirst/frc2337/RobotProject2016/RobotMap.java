@@ -143,6 +143,7 @@ public class RobotMap {
         //CANTalon set control mode parameters
         //Current = 3 Disabled = 15 Follower = 5 PercentVbus = 0 Position = 1 Speed = 2 Voltage = 4
         intakeintakeMotorA.setControlMode(0);
+        shooterArmshooterArmMotorB.setControlMode(0);
         
         intakeintakeMotorB = new CANTalon(10);
         LiveWindow.addActuator("Intake", "intakeMotorB", intakeintakeMotorB);
@@ -154,6 +155,8 @@ public class RobotMap {
         shooterArmshooterArmMotorB = new CANTalon(11);
         LiveWindow.addActuator("ShooterArm", "shooterArmMotorB", shooterArmshooterArmMotorB);
         shooterArmshooterArmMotorB.setControlMode(5);
+        shooterArmshooterArmMotorB.reverseOutput(true);
+        shooterArmshooterArmMotorB.set(7);
         
         
         chassisDrive = new RobotDrive(chassisPIDchassisLeft1, chassisPIDchassisLeft2, chassisPIDchassisRight1, chassisPIDchassisRight2);
