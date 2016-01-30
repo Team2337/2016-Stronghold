@@ -16,7 +16,7 @@ public class shooter_HookShot extends Command  {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterArm.shooterHookShot();
+    	Robot.shooterArmPID.shooterHookShot();
     }
 
     // Make this return true when this Command no longer needs to run execute()
