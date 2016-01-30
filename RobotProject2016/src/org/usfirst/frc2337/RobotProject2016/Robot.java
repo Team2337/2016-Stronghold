@@ -37,7 +37,6 @@ public class Robot extends IterativeRobot {
     public static Intake intake;
     public static PowerTakeOff powerTakeOff;
     public static ChassisPID chassisPID;
-    public static ShooterArm shooterArm;
     public static Scaler scaler;
     public static IntakeWrist intakeWrist;
     public static ChassisShifter chassisShifter;
@@ -58,7 +57,6 @@ public class Robot extends IterativeRobot {
         intake = new Intake();
         powerTakeOff = new PowerTakeOff();
         chassisPID = new ChassisPID();
-        shooterArm = new ShooterArm();
         scaler = new Scaler();
         intakeWrist = new IntakeWrist();
         chassisShifter = new ChassisShifter();
