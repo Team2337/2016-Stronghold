@@ -28,7 +28,6 @@ public class Intake extends Subsystem {
     private final double inhaleSpeed = 1;
     private final double exhaleSpeed = -1;
 
-    private final CANTalon intakeLifterA = RobotMap.intakeintakeLifterA;
     private final CANTalon intakeMotorA = RobotMap.intakeintakeMotorA;
     private final DigitalInput ballSensor = RobotMap.intakeBallSensor;
     private final CANTalon intakeMotorB = RobotMap.intakeintakeMotorB;
