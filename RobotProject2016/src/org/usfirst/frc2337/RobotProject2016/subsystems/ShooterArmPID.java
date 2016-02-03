@@ -17,10 +17,9 @@ public class ShooterArmPID extends PIDSubsystem {
 
 	private final Encoder shooterEncoder = RobotMap.shooterPIDEncoder;
     private final AnalogPotentiometer shooterArmPot = RobotMap.shooterArmPIDshooterArmPot;
-    private final CANTalon shooterArmMotorA = RobotMap.shooterArmPIDMotorA;
-    private final CANTalon shooterArmMotorB = RobotMap.shooterArmPIDMotorB;
+    private final CANTalon shooterArmMotor = RobotMap.shooterArmPIDMotorA;
     
-    
+    //  Encoder = 1, POT = 2;
     private double encoderPotChooser = 1;
     private double layupShot;
     private double hookShot;
@@ -79,7 +78,7 @@ public class ShooterArmPID extends PIDSubsystem {
     
 
     protected void usePIDOutput(double output) {
-        shooterArmMotorA.pidWrite(output);
+        shooterArmMotor.pidWrite(output);
     }
    /**
     * Set the position of the shooterarm using the analog pot
@@ -94,7 +93,7 @@ public class ShooterArmPID extends PIDSubsystem {
      *    
     */
     public void armUp() {
-    	shooterArmMotorA.set(teleopArmSpeedUp);
+    	shooterArmMotor.set(teleopArmSpeedUp);
     }
     /**
      * Sets arm motor to lower the arm using armSpeedDown variable declared towards the top of the ShooterArm
@@ -102,28 +101,24 @@ public class ShooterArmPID extends PIDSubsystem {
      * 
      */
     public void armDown() {
-    	shooterArmMotorA.set(teleopArmSpeedDown); 	
+    	shooterArmMotor.set(teleopArmSpeedDown); 	
     }
     /**
      * positions shooter arm for Layup shot using layupShot variable declared towards the top of the ShooterArm
      * Subsystem
      * 
-     * Chris Bupp 
      */
     public void shooterLayup() {
-    	shooterArmMotorA.setSetpoint(layupShot);
-    	shooterArmMotorB.setSetpoint(layupShot);
+    	shooterArmMotor.setSetpoint(layupShot);
     	}
     /**
      * positions shooter arm for hook shot using hookShot variable declared towards the top of the ShooterArm
      * Subsystem
      */
     public void shooterHookShot() {
-    	shooterArmMotorA.setSetpoint(hookShot);
-    	shooterArmMotorB.setSetpoint(hookShot);
+    	shooterArmMotor.setSetpoint(hookShot);
     	}
     public void stopMotors() {
-    	shooterArmMotorA.set(0);
-    	shooterArmMotorB.set(0);
+    	shooterArmMotor.set(0);
     }
 }
