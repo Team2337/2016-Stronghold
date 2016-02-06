@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANSpeedController.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -20,7 +21,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
-
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -98,33 +98,33 @@ public class RobotMap {
     	
     	chassisPIDchassisLeft1 = new CANTalon(2);
         LiveWindow.addActuator("ChassisPID", "chassisLeft1", chassisPIDchassisLeft1);
-        chassisPIDchassisLeft1.setControlMode(0);
+        chassisPIDchassisLeft1.changeControlMode(TalonControlMode.PercentVbus);
         
          
         chassisPIDchassisLeft2 = new CANTalon(4);
         LiveWindow.addActuator("ChassisPID", "chassisLeft2", chassisPIDchassisLeft2);
-        chassisPIDchassisLeft2.setControlMode(5);
-        chassisPIDchassisLeft2.set(2);
+        chassisPIDchassisLeft2.changeControlMode(TalonControlMode.Follower);
+        chassisPIDchassisLeft2.set(chassisPIDchassisLeft1.getDeviceID());
 
         
         chassisPIDchassisLeft3 = new CANTalon(6);
         LiveWindow.addActuator("ChassisPID", "chassisLeft3", chassisPIDchassisLeft3);
-        chassisPIDchassisLeft3.setControlMode(5);
-        chassisPIDchassisLeft3.set(2);
+        chassisPIDchassisLeft3.changeControlMode(TalonControlMode.Follower);
+        chassisPIDchassisLeft3.set(chassisPIDchassisLeft1.getDeviceID());
          
         chassisPIDchassisRight1 = new CANTalon(1);
         LiveWindow.addActuator("ChassisPID", "chassisRight1", chassisPIDchassisRight1);
-        chassisPIDchassisRight1.setControlMode(0);
+        chassisPIDchassisRight1.changeControlMode(TalonControlMode.PercentVbus);
          
         chassisPIDchassisRight2 = new CANTalon(3);
         LiveWindow.addActuator("ChassisPID", "chassisRight2", chassisPIDchassisRight2);
-        chassisPIDchassisRight2.setControlMode(5);
-        chassisPIDchassisRight2.set(1);
+        chassisPIDchassisRight2.changeControlMode(TalonControlMode.Follower);
+        chassisPIDchassisRight2.set(chassisPIDchassisRight1.getDeviceID());
         
         chassisPIDchassisRight3 = new CANTalon(5);
         LiveWindow.addActuator("ChassisPID", "chassisRight3", chassisPIDchassisRight3);
-        chassisPIDchassisRight3.setControlMode(5);
-        chassisPIDchassisRight3.set(1);
+        chassisPIDchassisRight3.changeControlMode(TalonControlMode.Follower);
+        chassisPIDchassisRight3.set(chassisPIDchassisRight1.getDeviceID());
          
         shooterArmPIDMotorA = new CANTalon(7);
         LiveWindow.addActuator("ShooterArm", "shooterArmMotorA", shooterArmPIDMotorA);
@@ -184,12 +184,12 @@ public class RobotMap {
         LiveWindow.addSensor("Intake", "ballSensor", intakeBallSensor);
        
         
-        chassisDrive = new RobotDrive(chassisPIDchassisLeft1, chassisPIDchassisLeft2, chassisPIDchassisRight1, chassisPIDchassisRight2);
+        chassisDrive = new RobotDrive(chassisPIDchassisLeft1, chassisPIDchassisRight1);
     	chassisDrive.setMaxOutput(1.0);
     	chassisDrive.setSensitivity(0.5);
-    	chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+    	//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
     	chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);    	
-    	chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);   
+    	//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);   
     	chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);   
     	
         try {
