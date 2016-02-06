@@ -13,9 +13,10 @@ package org.usfirst.frc2337.RobotProject2016.subsystems;
 
 import org.usfirst.frc2337.RobotProject2016.RobotMap;
 import org.usfirst.frc2337.RobotProject2016.commands.*;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
-
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -29,10 +30,11 @@ public class Intake extends Subsystem {
     private final double exhaleSpeed = -1;
 
     private final CANTalon intakeMotorA = RobotMap.intakeintakeMotorA;
-    private final DigitalInput ballSensor = RobotMap.intakeBallSensor;
     private final CANTalon intakeMotorB = RobotMap.intakeintakeMotorB;
-    
-
+    private final DigitalInput leftBallSensor = RobotMap.intakeLeftBallSensor;
+    private final DigitalInput rightBallSensor = RobotMap.intakeRightBallSensor;
+    private final DigitalInput gotBallSensor = RobotMap.intakeGotBallSensor;
+    		
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -73,9 +75,31 @@ public class Intake extends Subsystem {
 	   intakeMotorA.set(0);
 	   intakeMotorB.set(0);
    }
-   public boolean getBallSensorState() {
-	   RobotMap.ballSensorState = ballSensor.get();
-	   return ballSensor.get();
+   /**
+    * See if the ball is center on left side 
+    * @return
+    */
+   public boolean getLeftBallSensorState() {
+	   RobotMap.leftBallSensorState = leftBallSensor.get();
+	   return leftBallSensor.get();
    }
+   /**
+    *  See if the ball is center on right side 
+    * @return
+    */
+   public boolean getRightBallSensorState() {
+	   RobotMap.rightBallSensorState = rightBallSensor.get();
+	   return rightBallSensor.get();
+   }
+   /**
+    *  See if a ball is in the intake
+    * @return
+    */
+   public boolean gotBallSensorState() {
+	   RobotMap.gotBallSensorState = gotBallSensor.get();
+	   return gotBallSensor.get();
+   }
+   
+   
 }
 

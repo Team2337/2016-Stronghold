@@ -104,6 +104,7 @@ public class Robot extends IterativeRobot {
       SmartDashboard.putNumber(   "IMU_Pitch",            RobotMap.gyro.getPitch());
       SmartDashboard.putNumber(   "IMU_Roll",             RobotMap.gyro.getRoll());
       SmartDashboard.putNumber(   "IMU_ANGLE",             RobotMap.gyro.getAngle());
+      SmartDashboard.putBoolean("okToShoot", RobotMap.okToShoot);
 	}
 
     /**

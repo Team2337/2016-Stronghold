@@ -49,7 +49,10 @@ public class RobotMap {
     public static CANTalon intakeintakeMotorB;
     public static CANTalon shooterArmPIDMotorB;
     
-    public static DigitalInput intakeBallSensor;
+    public static DigitalInput intakeLeftBallSensor;
+    public static DigitalInput intakeRightBallSensor;
+    public static DigitalInput intakeGotBallSensor;
+    
     public static DoubleSolenoid powerTakeOffptoSolenoid;
 	
 	public static Encoder chassisPIDLeftEncoder;
@@ -67,15 +70,16 @@ public class RobotMap {
     public static Solenoid chassisShiftershiftSolenoid;
     public static Solenoid ledGRIPCamera;
     
-    public static Ultrasonic intakeballSensor;
+    public static Ultrasonic intakeSensor;
     public static Ultrasonic chassisPIDultrasonicSensor;
   
     
     ////  Public variables
-    public static boolean ballSensorState;
-    
+    public static boolean leftBallSensorState;
+    public static boolean rightBallSensorState;
+    public static boolean gotBallSensorState;
     public static String gripFilename = "/home/lvuser/main.grip";
-    
+    public static boolean okToShoot = false;
     
     //Start of init
     public static void init() {
@@ -180,9 +184,16 @@ public class RobotMap {
         chassisPIDultrasonicSensor = new Ultrasonic(6, 7);
         LiveWindow.addSensor("ChassisPID", "ultrasonicSensor", chassisPIDultrasonicSensor);
         
-        intakeBallSensor = new DigitalInput(8);
-        LiveWindow.addSensor("Intake", "ballSensor", intakeBallSensor);
+        intakeLeftBallSensor = new DigitalInput(8);
+        LiveWindow.addSensor("Intake", "ballSensor", intakeLeftBallSensor);
        
+        intakeRightBallSensor = new DigitalInput(9);
+        LiveWindow.addSensor("Intake", "ballSensor", intakeRightBallSensor);
+        
+        intakeGotBallSensor = new DigitalInput(10);
+        LiveWindow.addSensor("Intake", "ballSensor", intakeGotBallSensor);
+        
+   
         
         chassisDrive = new RobotDrive(chassisPIDchassisLeft1, chassisPIDchassisLeft2, chassisPIDchassisRight1, chassisPIDchassisRight2);
     	chassisDrive.setMaxOutput(1.0);
