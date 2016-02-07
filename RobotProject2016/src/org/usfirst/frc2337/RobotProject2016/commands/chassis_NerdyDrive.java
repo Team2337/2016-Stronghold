@@ -15,8 +15,8 @@ public class chassis_NerdyDrive extends Command {
 	double turnOutput;
 	double leftJoystick, turnJoystick,turnReduction;
 	double absTurn, absSpeed,actualTurnMagnitude,actualTurn;
-	double maxTurnFullSpeed = 0.45;
-	double  deadband =0.1;
+	double maxTurnFullSpeed;
+	double deadband = 0.1;
 	
 	public chassis_NerdyDrive() {
 		requires(Robot.chassisPID);
@@ -25,7 +25,7 @@ public class chassis_NerdyDrive extends Command {
 	
 	
 	protected void initialize() {
-		
+		maxTurnFullSpeed = Robot.prefs.getDouble("NerdyTurnVarible", 0.45);
 		
 	}
 

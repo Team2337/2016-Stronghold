@@ -109,7 +109,10 @@ public class OI {
         
         driveWithGyroAndEncoder = new JoystickButton(driverJoystick, Right_Bumper);
        //driveWithGyro.whileHeld(new chassis_DriveWithGyro());
-        driveWithGyroAndEncoder.whenPressed(new Auton_GyroAndEncoderFwd(0.5, 1400));
+       // driveWithGyroAndEncoder.whenPressed(new Auton_GyroAndEncoderFwd(0.5, RobotMap.autoEncoderDist));
+        driveWithGyroAndEncoder.whenPressed(new Auton_GyroAndEncoderFwd(0.5));
+        //System.out.println(RobotMap.autoEncoderDist);
+
         
         
         
