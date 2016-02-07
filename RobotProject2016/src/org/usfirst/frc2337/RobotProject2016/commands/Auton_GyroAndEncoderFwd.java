@@ -16,10 +16,11 @@ public class Auton_GyroAndEncoderFwd extends Command {
 	public double yaw;
 	public double m_target;
 
-    public Auton_GyroAndEncoderFwd(double speed, double encoderTarget) {
+   // public Auton_GyroAndEncoderFwd(double speed, double encoderTarget) {
+	 public Auton_GyroAndEncoderFwd(double speed) {
     	requires(Robot.chassisPID);
     	setTimeout(5);
-    	m_target = encoderTarget;
+    	//m_target = encoderTarget
     	m_speed = speed;
 
     }
@@ -28,7 +29,7 @@ public class Auton_GyroAndEncoderFwd extends Command {
     protected void initialize() {
     	Robot.chassisPID.resetEncoders();
     	Robot.chassisPID.resetGyro();
-    	
+    	m_target = Robot.prefs.getDouble("AutonEncDist", 60.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,6 +38,7 @@ public class Auton_GyroAndEncoderFwd extends Command {
     	RobotMap.chassisDrive.drive(m_speed, yaw*Kp);
     	//Robot.chassisPID.arcadeDrive(m_speed, 0);
     	//Timer.delay(0.004);
+    	System.out.println(m_target);
     }
 
     // Make this return true when this Command no longer needs to run execute()
