@@ -24,8 +24,8 @@ public class intake_ActivateMotors extends Command {
 
 
     protected void initialize() {
-	RobotMap.okToShoot = false;
-	
+    	RobotMap.okToShoot = false;
+    	m_speed = 1;
     }
 
 
@@ -34,17 +34,19 @@ public class intake_ActivateMotors extends Command {
     	rightState = Robot.intake.getRightBallSensorState();
     	ballState = Robot.intake.gotBallSensorState();
     	
-    	if ((leftState = false) || (rightState = false)) {
+    	if ((leftState == false) || (rightState == false)) {
     		 m_speed = 1;
-    		 
-    	} else if ((leftState = true) && (rightState = true)){
-    		if (ballState = true) {
+    		
+    	} else if ((leftState == true) && (rightState == true)){
+    		if (ballState == true) {
     			m_speed = 0.1;
     			RobotMap.okToShoot = true;
+    			System.out.println("got here");;
     		} else {
     			m_speed = 1;
     			RobotMap.okToShoot = false;
     		}
+    	
     		
     	}
     	
@@ -64,5 +66,6 @@ public class intake_ActivateMotors extends Command {
 
    
     protected void interrupted() {
+    	Robot.intake.setMotor(0);
     }
 }

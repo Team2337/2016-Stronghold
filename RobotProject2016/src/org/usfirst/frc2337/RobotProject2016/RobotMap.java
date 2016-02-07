@@ -170,13 +170,16 @@ public class RobotMap {
         
         chassisPIDLeftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
         LiveWindow.addSensor("ChassisPID", "driveEncoder", chassisPIDLeftEncoder);
-        chassisPIDLeftEncoder.setDistancePerPulse(1.0);
-        chassisPIDLeftEncoder.setPIDSourceType(PIDSourceType.kRate);
+        //chassisPIDLeftEncoder.setDistancePerPulse(1.0);
+        //chassisPIDLeftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+        LiveWindow.addSensor("ChassisPIDLeftEnc", "Strafe Encoder", chassisPIDLeftEncoder);
+
    
         chassisPIDRightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
         LiveWindow.addSensor("ChassisPID", "driveEncoder", chassisPIDRightEncoder);
-        chassisPIDRightEncoder.setDistancePerPulse(1.0);
-        chassisPIDRightEncoder.setPIDSourceType(PIDSourceType.kRate);
+        //chassisPIDRightEncoder.setDistancePerPulse(1.0);
+        //chassisPIDRightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+        LiveWindow.addSensor("ChassisPIDRightEnc", "Strafe Encoder", chassisPIDRightEncoder);
         
         shooterPIDEncoder = new Encoder(4, 5, false, EncodingType.k4X);
         LiveWindow.addActuator("ShooterArmPID", "shooterArmEncoder", shooterPIDEncoder);

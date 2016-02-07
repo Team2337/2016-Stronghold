@@ -105,6 +105,12 @@ public class Robot extends IterativeRobot {
       SmartDashboard.putNumber(   "IMU_Roll",             RobotMap.gyro.getRoll());
       SmartDashboard.putNumber(   "IMU_ANGLE",             RobotMap.gyro.getAngle());
       SmartDashboard.putBoolean("okToShoot", RobotMap.okToShoot);
+      SmartDashboard.putBoolean("leftBall", RobotMap.intakeLeftBallSensor.get());
+      SmartDashboard.putBoolean("RightBall", RobotMap.intakeRightBallSensor.get());
+      SmartDashboard.putBoolean("gotBall", RobotMap.intakeGotBallSensor.get());
+      SmartDashboard.putDouble("Encoder distance" , RobotMap.chassisPIDLeftEncoder.getRate());
+      SmartDashboard.putNumber("Encoder distance" , RobotMap.chassisPIDLeftEncoder.getDistance());
+
 	}
 
     /**

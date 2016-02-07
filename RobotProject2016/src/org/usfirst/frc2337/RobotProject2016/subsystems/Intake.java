@@ -80,7 +80,7 @@ public class Intake extends Subsystem {
     * @return
     */
    public boolean getLeftBallSensorState() {
-	   RobotMap.leftBallSensorState = leftBallSensor.get();
+	   //RobotMap.leftBallSensorState = leftBallSensor.get();
 	   return leftBallSensor.get();
    }
    /**
@@ -88,7 +88,7 @@ public class Intake extends Subsystem {
     * @return
     */
    public boolean getRightBallSensorState() {
-	   RobotMap.rightBallSensorState = rightBallSensor.get();
+	   //RobotMap.rightBallSensorState = rightBallSensor.get();
 	   return rightBallSensor.get();
    }
    /**
@@ -96,7 +96,7 @@ public class Intake extends Subsystem {
     * @return
     */
    public boolean gotBallSensorState() {
-	   RobotMap.gotBallSensorState = gotBallSensor.get();
+	   //RobotMap.gotBallSensorState = gotBallSensor.get();
 	   return gotBallSensor.get();
    }
    
