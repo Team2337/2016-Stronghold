@@ -70,6 +70,9 @@ public class RobotMap {
     public static Solenoid chassisShiftershiftSolenoid;
     public static Solenoid ledGRIPCamera;
     
+    public static Solenoid keyPullOut;
+    
+    
     public static Ultrasonic intakeSensor;
     public static Ultrasonic chassisPIDultrasonicSensor;
   
