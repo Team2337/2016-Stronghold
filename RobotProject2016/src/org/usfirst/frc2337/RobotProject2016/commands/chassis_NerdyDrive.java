@@ -35,9 +35,10 @@ public class chassis_NerdyDrive extends Command {
     		speed = Robot.oi.driverJoystick.getRawAxis(2);
         	yaw = RobotMap.gyro.getAngle();
         	speed = speed * speed;
-        	RobotMap.chassisDrive.drive(speed, yaw*Kp);
+        	RobotMap.chassisDrive.drive(-speed, -yaw*Kp);
+        	SmartDashboard.putNumber("yaw4Nerds", yaw);
     	} else {
-		RobotMap.gyro.reset();
+		//RobotMap.gyro.reset();
 		leftJoystick = joystickMain.getRawAxis(1);
 		turnJoystick = joystickMain.getRawAxis(4);
 		absTurn = Math.abs(turnJoystick);
