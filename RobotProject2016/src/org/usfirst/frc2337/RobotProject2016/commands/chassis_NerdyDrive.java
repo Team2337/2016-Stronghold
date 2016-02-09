@@ -31,7 +31,12 @@ public class chassis_NerdyDrive extends Command {
 
 
 	protected void execute() {
-	
+		if (joystickMain.getRawAxis(2) > 0.2) {
+    		speed = Robot.oi.driverJoystick.getRawAxis(2);
+        	yaw = RobotMap.gyro.getAngle();
+        	speed = speed * speed;
+        	RobotMap.chassisDrive.drive(speed, yaw*Kp);
+    	} else {
 		RobotMap.gyro.reset();
 		leftJoystick = joystickMain.getRawAxis(1);
 		turnJoystick = joystickMain.getRawAxis(4);
@@ -56,7 +61,7 @@ public class chassis_NerdyDrive extends Command {
     	 SmartDashboard.putNumber(   "turnOutput",             turnOutput);
     	 SmartDashboard.putNumber(   "leftJoytick",             leftJoystick);
     	 SmartDashboard.putNumber(   "turnJoystick",             turnJoystick);
-		
+    	}
 	}
 
 	
