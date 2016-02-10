@@ -22,4 +22,7 @@ public class Shooter extends Subsystem {
 	public void shooterShoot(){
 		shooterSolenoid.set(false);
 	}
+	public boolean getShooterValue(){
+		return shooterSolenoid.get();
+	}
 }
