@@ -66,6 +66,7 @@ public class RobotMap {
     public static RobotDrive chassisDrive;
     
     public static Solenoid scalerscalerAirActuator;
+    public static Solenoid ShooterPneumaticPin;
     public static Solenoid intakeWristintakeWristSolenoid;
     public static Solenoid chassisShiftershiftSolenoid;
     public static Solenoid ledGRIPCamera;
