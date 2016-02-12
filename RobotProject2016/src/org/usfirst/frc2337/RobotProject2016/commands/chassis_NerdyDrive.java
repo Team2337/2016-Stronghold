@@ -37,6 +37,14 @@ public class chassis_NerdyDrive extends Command {
         	speed = speed * speed;
         	RobotMap.chassisDrive.drive(-speed, -yaw*Kp);
         	SmartDashboard.putNumber("yaw4Nerds", yaw);
+		}
+		//Allows for driver to drive with the Gyro backwards
+        if (joystickMain.getRawAxis(2) < -0.2) {
+        	speed = Robot.oi.driverJoystick.getRawAxis(2);
+            yaw = RobotMap.gyro.getAngle();
+            speed = speed * speed;
+            RobotMap.chassisDrive.drive(speed, yaw*Kp);
+            SmartDashboard.putNumber("yaw4Nerds", yaw); 	
     	} else {
 		//RobotMap.gyro.reset();
 		leftJoystick = joystickMain.getRawAxis(1);
