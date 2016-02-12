@@ -48,6 +48,7 @@ public class RobotMap {
     public static CANTalon shooterArmPIDMotorA;
     public static CANTalon intakeintakeMotorB;
     public static CANTalon shooterArmPIDMotorB;
+    public static CANTalon shooterRetractMotorA;
     
     public static DigitalInput intakeLeftBallSensor;
     public static DigitalInput intakeRightBallSensor;
@@ -58,6 +59,7 @@ public class RobotMap {
 	public static Encoder chassisPIDLeftEncoder;
 	public static Encoder chassisPIDRightEncoder;
 	public static Encoder shooterPIDEncoder;
+	public static Encoder shooterRetractPIDEncoder;
     
     public static NetworkTable gripTables;
     
@@ -157,6 +159,9 @@ public class RobotMap {
         shooterArmPIDMotorB.reverseOutput(true);
         shooterArmPIDMotorB.set(7);
         
+        shooterRetractMotorA = new CANTalon(12);
+        LiveWindow.addActuator("ShooterRetract", "shooterRetractMotorA", shooterRetractMotorA);
+        
  
         powerTakeOffptoSolenoid = new DoubleSolenoid(0, 3, 4);
         LiveWindow.addActuator("PowerTakeOff", "ptoSolenoid", powerTakeOffptoSolenoid);
@@ -190,6 +195,9 @@ public class RobotMap {
         
         shooterPIDEncoder = new Encoder(4, 5, false, EncodingType.k4X);
         LiveWindow.addActuator("ShooterArmPID", "shooterArmEncoder", shooterPIDEncoder);
+        
+        shooterRetractPIDEncoder = new Encoder(6, 7, false, EncodingType.k4X);
+        LiveWindow.addActuator("ShooterRetract", "shooterRetractPIDEncoder", shooterRetractPIDEncoder);
         
         chassisPIDultrasonicSensor = new Ultrasonic(6, 7);
         LiveWindow.addSensor("ChassisPID", "ultrasonicSensor", chassisPIDultrasonicSensor);
