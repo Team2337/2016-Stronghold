@@ -35,13 +35,22 @@ public class ChassisShifter extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
-    
+    /**
+     * Change to high gear
+     */
     public void highGear() {
     	shiftSolenoid.set(true);
     }
+    /**
+     * Change to low gear
+     */
     public void lowGear() {
     	shiftSolenoid.set(false);
     }
+    /**
+     * Get the status of Shifter Solenoid 
+     * @return
+     */
     public boolean getShiftStatus() {
     	return shiftSolenoid.get();
     }

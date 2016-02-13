@@ -117,6 +117,8 @@ public class Robot extends IterativeRobot {
       SmartDashboard.putBoolean("gotBall", RobotMap.intakeGotBallSensor.get());
       SmartDashboard.putDouble("Encoder distance" , RobotMap.chassisPIDLeftEncoder.getRate());
       SmartDashboard.putNumber("Encoder distance" , RobotMap.chassisPIDLeftEncoder.getDistance());
+      
+      SmartDashboard.putBoolean("Shifter Status" , RobotMap.chassisShiftershiftSolenoid.get());
       //SmartDashboard.putDouble("AutonEncDist", RobotMap.autoEncoderDist);
       
 
