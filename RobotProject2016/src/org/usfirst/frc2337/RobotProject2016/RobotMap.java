@@ -92,6 +92,8 @@ public class RobotMap {
     //Start of init
     public static void init() {
     	
+    	
+    	
     	chassisPIDaccelerometer = new AnalogAccelerometer(1);
         LiveWindow.addSensor("ChassisPID", "accelerometer ", chassisPIDaccelerometer);
         chassisPIDaccelerometer.setSensitivity(0.0);
