@@ -92,6 +92,8 @@ public class RobotMap {
     //Start of init
     public static void init() {
     	
+    	
+    	
     	chassisPIDaccelerometer = new AnalogAccelerometer(1);
         LiveWindow.addSensor("ChassisPID", "accelerometer ", chassisPIDaccelerometer);
         chassisPIDaccelerometer.setSensitivity(0.0);
@@ -198,7 +200,7 @@ public class RobotMap {
         shooterRetractPIDEncoder = new Encoder(6, 7, false, EncodingType.k4X);
         LiveWindow.addActuator("ShooterRetract", "shooterRetractPIDEncoder", shooterRetractPIDEncoder);
         
-        chassisPIDultrasonicSensor = new Ultrasonic(6, 7);
+        chassisPIDultrasonicSensor = new Ultrasonic(11, 12);
         LiveWindow.addSensor("ChassisPID", "ultrasonicSensor", chassisPIDultrasonicSensor);
         
         intakeLeftBallSensor = new DigitalInput(8);

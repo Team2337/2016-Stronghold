@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot {
         prefs = Preferences.getInstance();
         //RobotMap.autoEncoderDist = prefs.getDouble("AutonEncDist", 60.0);
         //RobotMap.maxTurnFullSpeed = prefs.getDouble("NerdyTurnVarible", 0.45);
-        
+        /*
         try {
         	killGRIP = Runtime.getRuntime().exec(new String[]{"ps | grep grip | grep -v grep | cut -f 2 -d \" \" | xargs kill"});
         	
@@ -99,6 +99,7 @@ public class Robot extends IterativeRobot {
         } catch (IOException e){
         	e.printStackTrace();
         }
+        */
     }
 
 	public void robotPeriodic() {
