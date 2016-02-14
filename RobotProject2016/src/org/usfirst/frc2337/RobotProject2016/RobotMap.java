@@ -190,6 +190,7 @@ public class RobotMap {
         LiveWindow.addSensor("ChassisPIDLeftEnc", "Strafe Encoder", chassisPIDLeftEncoder);
 
    
+        
         chassisPIDRightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
         LiveWindow.addSensor("ChassisPID", "driveEncoder", chassisPIDRightEncoder);
         //chassisPIDRightEncoder.setDistancePerPulse(1.0);
