@@ -98,6 +98,8 @@ public class OI {
     public JoystickButton armSetPointScale;
     
     public JoystickButton keypullout;
+    public JoystickButton lowToHigh;
+    public JoystickButton hightoLow;
     
     public JoystickButton ptest;
     
@@ -122,11 +124,22 @@ public class OI {
         driveWithGyroAndEncoder.whenPressed(new Auton_GyroAndEncoderFwd(0.5));
         //System.out.println(RobotMap.autoEncoderDist);
 
+
         target = new JoystickButton(driverJoystick, Start_Button);
         target.whenPressed(new chassis_Target());
         
         ptest = new JoystickButton(driverJoystick, Green_A);
         ptest.whenPressed(new scaler_pinPullOut());
+
+        lowToHigh = new JoystickButton(driverJoystick, Blue_X);
+        lowToHigh.whenPressed(new chassisShifter_LowToHigh());
+        
+        hightoLow = new JoystickButton(driverJoystick, Yellow_Y);
+        hightoLow.whenPressed(new chassisShifter_HighToLow());
+        
+        
+
+
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
