@@ -13,12 +13,13 @@ public class chassis_TargetWithGyro extends Command {
 
 double[] defaultValue = new double[0];	
 
-double centerpnt = 150;
+double centerpnt = 172;
 double firstcenter, secondcenter;
 double deadband = 10;
-double turnValue, targetAngle, fishAngle, turnSpeed;
+double turnValue, targetAngle, fishAngle;
+double turnSpeed = 0.4;
 double Kp = .003;
-double degreeConversion = 0.07;
+double degreeConversion = 0.01;
 
 
 
@@ -62,6 +63,14 @@ double degreeConversion = 0.07;
 
 
 	protected void end() {
+		double[] fish = new double[0];
+		double[] centerxend = RobotMap.gripTables.getNumberArray("centerX", fish);
+		System.out.print("centerX-end: ");
+			for (double centerXend : centerxend) {
+				System.out.print(centerXend + " ");
+
+			System.out.println();
+			}
 		Robot.chassisPID.stopMotors();
 	}
 
