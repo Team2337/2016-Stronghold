@@ -3,12 +3,12 @@ package org.usfirst.frc2337.RobotProject2016.subsystems;
 
 import org.usfirst.frc2337.RobotProject2016.RobotMap;
 import org.usfirst.frc2337.RobotProject2016.commands.*;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CANTalon;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CANTalon;
 
 /**
  *
@@ -24,26 +24,30 @@ public class ShooterArmPID extends PIDSubsystem {
     private double layupShot;
     private double hookShot;
     private final double setPointTolerance = 0.05;
-    private final double autonArmSpeedUp = .2;
-    private final double autonArmSpeedDown = -.2;
-    private final double teleopArmSpeedUp = .2;
-    private final double teleopArmSpeedDown = -.2;
-    private final double armToplimit = 4;
-    private final double armBottomlimit = 0;
+    private final double autonMaxArmSpeedUp = .2;
+    private final double autonMaxArmSpeedDown = -.2;
+    public final double teleopArmSpeedUp = .2;
+    public final double teleopArmSpeedDown = -.2;
+    public final double armToplimit = 4;
+    public final double armBottomlimit = 0;
     
     public boolean armPIDstatus = false;
     public boolean armjoystickstatus = true;
+    
+    boolean PIDStatus = false;
+    //Joystick mode for switching back motor and lift
+    public boolean joystickStatus = true;
     
     
     // Initialize your subsystem here
     public ShooterArmPID() {
        
         super("ShooterArmPID", 1.0, 0.0, 0.0);
-        setAbsoluteTolerance(0.2);
+        setAbsoluteTolerance(setPointTolerance);
         getPIDController().setContinuous(false);
         LiveWindow.addActuator("ShooterArmPID", "PIDSubsystem Controller", getPIDController());
 
-        getPIDController().setOutputRange(autonArmSpeedDown, autonArmSpeedUp);
+        getPIDController().setOutputRange(autonMaxArmSpeedDown, autonMaxArmSpeedUp);
         getPIDController().setInputRange(armBottomlimit, armToplimit);
 
         if(encoderPotChooser == 1){
@@ -62,7 +66,8 @@ public class ShooterArmPID extends PIDSubsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new shooterArm_DoNothing());
+        setDefaultCommand(new shooterArm_JoystickControl());
+        
     }
 
     protected double returnPIDInput() {
@@ -118,7 +123,39 @@ public class ShooterArmPID extends PIDSubsystem {
     public void shooterHookShot() {
     	shooterArmMotor.setSetpoint(hookShot);
     	}
+    /**
+     * stops the shooter arm motor(s)
+     */
     public void stopMotors() {
     	shooterArmMotor.set(0);
+    }
+    /**
+     * Disables the PID subsystem on the arm.
+     */
+    public void stopPID(){
+    	this.PIDStatus = true;
+    	this.disable();
+    }
+    /**
+     * Enables the PID subsystem on the arm.
+     */
+    public void startPID() {
+    	this.PIDStatus = false;
+    	this.enable();
+    }
+    /**
+     * Returns the status of the arm's PID subsystem to determine whether it is enabled.
+     * @return true or false
+     */
+    public boolean getPIDStatus(){
+    	return this.PIDStatus;
+    }
+    /**
+     * Returns the status of the operator station button to determine whether the joystick Y axis controls the lift or the back arm.
+     * @return true or false.......... not used???
+     */
+    
+    public boolean joystickModeStatus() {
+    	return this.joystickStatus;
     }
 }
