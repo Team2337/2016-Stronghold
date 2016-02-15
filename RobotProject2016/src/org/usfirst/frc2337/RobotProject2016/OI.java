@@ -173,16 +173,16 @@ public class OI {
         drive_Brake.whenReleased(new chassis_DriveBrakeReleased());
         
         armSetPointBase = new JoystickButton(operatorControls, Back_Button);
-        armSetPointBase.whenPressed(new shooterArm_armSetPointBase(1));
+        armSetPointBase.whenPressed(new shooterArm_ArmSetPointBase(1));
         
         armSetPointLongShot = new JoystickButton(operatorControls, Back_Button);
-        armSetPointLongShot.whenPressed(new shooterArm_armSetPointBase(3));
+        armSetPointLongShot.whenPressed(new shooterArm_ArmSetPointBase(3));
        
         armSetPointShortShot = new JoystickButton(operatorControls, Back_Button);
-        armSetPointShortShot.whenPressed(new shooterArm_armSetPointBase(4));
+        armSetPointShortShot.whenPressed(new shooterArm_ArmSetPointBase(4));
         
         armSetPointScale = new JoystickButton(operatorControls, Back_Button);
-        armSetPointScale.whenPressed(new shooterArm_armSetPointBase(9));
+        armSetPointScale.whenPressed(new shooterArm_ArmSetPointBase(9));
         
         keypullout = new JoystickButton(operatorControls, Back_Button);
         keypullout.whenPressed(new scaler_pinPullOut());
