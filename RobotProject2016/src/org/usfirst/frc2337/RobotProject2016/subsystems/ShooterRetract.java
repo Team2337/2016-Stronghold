@@ -18,6 +18,9 @@ public class ShooterRetract extends PIDSubsystem {
 	private final double retractSpeedUp = .2;
 	private final double retractForwardLimit = 1.0;
 	private final double retractBackwardLimit = 0.5;
+	
+	public double shooterArmDeadBand = 10;
+	
 
 	public ShooterRetract(double p, double i, double d, double period) {
         super("ShooterRetract", 1.0, 0.0, 0.0);

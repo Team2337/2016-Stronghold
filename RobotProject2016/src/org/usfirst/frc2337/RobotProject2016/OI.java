@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.buttons.*;
 
 
 
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -148,11 +149,17 @@ public class OI {
         energizeWrist = new JoystickButton(operatorJoystick, 4 );
         energizeWrist.whenPressed(new intakeWrist_Activate());
         
+        
+        
+        
         layup = new JoystickButton(operatorJoystick, 7);
-        layup.whenPressed(new shooter_Layup());
+        layup.whenPressed(new shooterArm_armSetPointShortShot((int)RobotMap.shortShot));
         
         hookShot = new JoystickButton(operatorJoystick, 8);
-        hookShot.whenPressed(new shooter_HookShot());
+        hookShot.whenPressed(new shooterArm_armSetPointLongShot((int)RobotMap.longShot));
+        
+        
+        
         
         intake_In = new JoystickButton(operatorJoystick, 5);
         intake_In.whileHeld(new intake_Inhale());

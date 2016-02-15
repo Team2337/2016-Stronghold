@@ -24,7 +24,7 @@ public class shooterArm_armSetPointShortShot extends Command {
 
 
 	protected boolean isFinished() {
-		return (Robot.shooterArmPID.onTarget());
+		return (Robot.shooterArmPID.onTarget() || Robot.shooterArmPID.getPosition() > Robot.shooterRetract.shooterArmDeadBand);
 	}
 
 

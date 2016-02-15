@@ -86,6 +86,10 @@ public class RobotMap {
     public static boolean gotBallSensorState;
     public static String gripFilename = "/home/lvuser/main.grip";
     public static boolean okToShoot = false;
+   
+    public static double shortShot = 10;
+    public static double longShot = 10;
+    
     //public static double autoEncoderDist;
     //public static double maxTurnFullSpeed;
     
