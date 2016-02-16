@@ -1,21 +1,22 @@
+
 package org.usfirst.frc2337.RobotProject2016.commands;
 
 import org.usfirst.frc2337.RobotProject2016.Robot;
+import org.usfirst.frc2337.RobotProject2016.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class shooterArm_ArmSetPointScale extends Command {
 
-	int setpoint; 
 	
-	public shooterArm_ArmSetPointScale(int setpoint) {
-		requires(Robot.shooterArmPID);
-        this.setpoint = setpoint;		
+	public shooterArm_ArmSetPointScale() {
+		requires(Robot.shooterArmPID);	
 	}
 
 	
 	protected void initialize() {
-		Robot.shooterArmPID.armSetpoint(setpoint);
+		RobotMap.shooterArmOnTarget = false;
+		Robot.shooterArmPID.setSetpoint(Robot.shooterArmPID.scale);
 	}
 	
 	
@@ -24,7 +25,10 @@ public class shooterArm_ArmSetPointScale extends Command {
 
 
 	protected boolean isFinished() {
-		return (Robot.shooterArmPID.onTarget());
+		if( Robot.shooterArmPID.onTarget() )
+			{RobotMap.shooterArmOnTarget = true;
+			return true;}
+	return false;
 	}
 
 
