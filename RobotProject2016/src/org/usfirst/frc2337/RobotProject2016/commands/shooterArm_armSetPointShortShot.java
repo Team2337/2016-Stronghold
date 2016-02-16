@@ -4,11 +4,11 @@ import org.usfirst.frc2337.RobotProject2016.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class shooterArm_armSetPointShortShot extends Command {
+public class shooterArm_ArmSetPointShortShot extends Command {
 
 	int setpoint; 
 	
-	public shooterArm_armSetPointShortShot(int setpoint) {
+	public shooterArm_ArmSetPointShortShot(int setpoint) {
 		requires(Robot.shooterArmPID);
         this.setpoint = setpoint;		
 	}
