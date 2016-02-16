@@ -5,26 +5,28 @@ import java.io.IOException;
 import org.usfirst.frc2337.RobotProject2016.Robot;
 import org.usfirst.frc2337.RobotProject2016.RobotMap;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
-public class chassis_TargetWithGyroPID extends PIDCommand {
+public class chassis_TargetWithGyroPIDAndJoystick extends PIDCommand {
 	
 	double[] defaultValue = new double[0];	
 
 	double centerpnt = 172;
 	double firstcenter, secondcenter;
 	double deadband = 10;
-	double turnValue, targetAngle, fishAngle;
+	double turnValue, targetAngle, fishAngle, leftJoystick;
 	double turnSpeed = 0.4;
+	private Joystick joystickMain = Robot.oi.driverJoystick;
 	double Kp = .003;
 	double degreeConversion = 0.04;
 	double setpoint;
 	double timeout = 5.0;
 	static double P;
 
-	public chassis_TargetWithGyroPID() {
+	public chassis_TargetWithGyroPIDAndJoystick() {
 		//chassis_TargetWithGyroPID(String name, double p, double i, double d)
 
 		super("chassis_TargetWithGyroPID", .13, 0, 0.02);
@@ -41,8 +43,8 @@ public class chassis_TargetWithGyroPID extends PIDCommand {
 
 
 	protected void usePIDOutput(double output) {
-
-		Robot.chassisPID.arcadeDrive(0, output);	
+		leftJoystick = joystickMain.getRawAxis(1);
+		Robot.chassisPID.arcadeDrive(leftJoystick, output);	
 	}
 
 	protected void initialize() {
@@ -76,7 +78,7 @@ public class chassis_TargetWithGyroPID extends PIDCommand {
 	}
 
 	protected boolean isFinished() {
-		return (isTimedOut() || getPIDController().onTarget());
+		return false;
 	}
 
 	protected void end() {

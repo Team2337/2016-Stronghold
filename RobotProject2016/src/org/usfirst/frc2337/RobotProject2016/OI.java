@@ -105,6 +105,7 @@ public class OI {
     public JoystickButton ptest;
     
     public JoystickButton driveWithGyroNoTurn;
+    public JoystickButton targetWithJ;
     
     
     public OI() {
@@ -132,7 +133,8 @@ public class OI {
         target.whenPressed(new chassis_TargetWithGyroPID());
         
         ptest = new JoystickButton(driverJoystick, Green_A);
-        ptest.whenPressed(new scaler_pinPullOut());
+        //ptest.whenPressed(new scaler_pinPullOut());
+        ptest.whenPressed(new GyroReset());
 
         lowToHigh = new JoystickButton(driverJoystick, Blue_X);
         lowToHigh.whenPressed(new chassisShifter_LowToHigh());
@@ -140,8 +142,8 @@ public class OI {
         hightoLow = new JoystickButton(driverJoystick, Yellow_Y);
         hightoLow.whenPressed(new chassisShifter_HighToLow());
         
-        
-
+        targetWithJ = new JoystickButton(driverJoystick, Red_B);
+        targetWithJ.whileHeld(new chassis_TargetWithGyroPID());
 
 
         // SmartDashboard Buttons
