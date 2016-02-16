@@ -33,10 +33,12 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class RobotMap {
 
     public static AHRS gyro;
-	public static AnalogGyro chassisPIDgyro;
+	public static AnalogGyro chassisPIDgyro;  // miniGyro, not currently used
 	
-	public static AnalogAccelerometer chassisPIDaccelerometer; 
+	public static AnalogAccelerometer chassisPIDaccelerometer; //not currently used?
 	public static AnalogPotentiometer shooterArmPIDshooterArmPot;
+	
+    public static RobotDrive chassisDrive;
 	 
     public static CANTalon intakeintakeMotorA;
     public static CANTalon chassisPIDchassisLeft1;
@@ -53,9 +55,7 @@ public class RobotMap {
     public static DigitalInput intakeLeftBallSensor;
     public static DigitalInput intakeRightBallSensor;
     public static DigitalInput intakeGotBallSensor;
-    
-    public static DoubleSolenoid powerTakeOffptoSolenoid;
-	
+
 	public static Encoder chassisPIDLeftEncoder;
 	public static Encoder chassisPIDRightEncoder;
 	public static Encoder shooterPIDEncoder;
@@ -65,29 +65,30 @@ public class RobotMap {
     
     public static PowerDistributionPanel chassisPIDpowerDistributionPanel;
     
-    public static RobotDrive chassisDrive;
-    
     public static Solenoid scalerscalerAirActuator;
     public static Solenoid ShooterPneumaticPin;
     public static Solenoid intakeWristintakeWristSolenoid;
     public static Solenoid chassisShiftershiftSolenoid;
     public static Solenoid ledGRIPCamera;
-    
     public static Solenoid keyPullOut;
-    
-    
+        
+    public static DoubleSolenoid powerTakeOffptoSolenoid;
     
     public static Ultrasonic intakeSensor;
     public static Ultrasonic chassisPIDultrasonicSensor;
   
     
     ////  Public variables
+    public static String gripFilename = "/home/lvuser/main.grip";
+    
     public static boolean leftBallSensorState;
     public static boolean rightBallSensorState;
     public static boolean gotBallSensorState;
-    public static String gripFilename = "/home/lvuser/main.grip";
+    public static boolean shooterRetractorPrimed;
+    public static boolean shooterRetractorRetracted;
+    public static boolean shooterArmOnTarget = false;
+    public static boolean visionOnTarget = false;
     public static boolean okToShoot = false;
-    public static boolean shooterRetractPrimed;
     
     //Start of init
     public static void init() {
@@ -103,28 +104,28 @@ public class RobotMap {
         LiveWindow.addSensor("ChassisPID", "gyro", chassisPIDgyro);
         chassisPIDgyro.setSensitivity(0.003);
         
-       
-    	//CANTalon set control mode parameters
-        //PercentVbus = 0, Position = 1, Speed = 2, Current = 3, Voltage = 4, Follower = 5, Disabled = 15 
         
         chassisPIDpowerDistributionPanel = new PowerDistributionPanel(0);
         LiveWindow.addSensor("ChassisPID", "powerDistributionPanel ", chassisPIDpowerDistributionPanel);
+        
+       
+    	//CANTalon set control mode parameters
+        //PercentVbus = 0, Position = 1, Speed = 2, Current = 3, Voltage = 4, Follower = 5, Disabled = 15        
     	
     	chassisPIDchassisLeft1 = new CANTalon(2);
         LiveWindow.addActuator("ChassisPID", "chassisLeft1", chassisPIDchassisLeft1);
         chassisPIDchassisLeft1.changeControlMode(TalonControlMode.PercentVbus);
-        
          
         chassisPIDchassisLeft2 = new CANTalon(4);
         LiveWindow.addActuator("ChassisPID", "chassisLeft2", chassisPIDchassisLeft2);
         chassisPIDchassisLeft2.changeControlMode(TalonControlMode.Follower);
         chassisPIDchassisLeft2.set(chassisPIDchassisLeft1.getDeviceID());
 
-        
         chassisPIDchassisLeft3 = new CANTalon(6);
         LiveWindow.addActuator("ChassisPID", "chassisLeft3", chassisPIDchassisLeft3);
         chassisPIDchassisLeft3.changeControlMode(TalonControlMode.Follower);
         chassisPIDchassisLeft3.set(chassisPIDchassisLeft1.getDeviceID());
+        
          
         chassisPIDchassisRight1 = new CANTalon(1);
         LiveWindow.addActuator("ChassisPID", "chassisRight1", chassisPIDchassisRight1);
@@ -139,10 +140,12 @@ public class RobotMap {
         LiveWindow.addActuator("ChassisPID", "chassisRight3", chassisPIDchassisRight3);
         chassisPIDchassisRight3.changeControlMode(TalonControlMode.Follower);
         chassisPIDchassisRight3.set(chassisPIDchassisRight1.getDeviceID());
+        
          
         shooterArmPIDMotorA = new CANTalon(7);
         LiveWindow.addActuator("ShooterArm", "shooterArmMotorA", shooterArmPIDMotorA);
         shooterArmPIDMotorA.setControlMode(0);  
+        
         
         intakeintakeMotorA = new CANTalon(8);
         LiveWindow.addActuator("Intake", "intakeMotorA", intakeintakeMotorA);
@@ -153,6 +156,7 @@ public class RobotMap {
         //intakeintakeMotorB.setControlMode(5);
         //intakeintakeMotorB.reverseOutput(true);
         //intakeintakeMotorB.set(8);
+        
         
         shooterArmPIDMotorB = new CANTalon(11);
         LiveWindow.addActuator("ShooterArm", "shooterArmMotorB", shooterArmPIDMotorB);
@@ -186,9 +190,7 @@ public class RobotMap {
         //chassisPIDLeftEncoder.setDistancePerPulse(1.0);
         //chassisPIDLeftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
         LiveWindow.addSensor("ChassisPIDLeftEnc", "Strafe Encoder", chassisPIDLeftEncoder);
-
-   
-        
+  
         chassisPIDRightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
         LiveWindow.addSensor("ChassisPID", "driveEncoder", chassisPIDRightEncoder);
         //chassisPIDRightEncoder.setDistancePerPulse(1.0);
@@ -201,8 +203,10 @@ public class RobotMap {
         shooterRetractPIDEncoder = new Encoder(6, 7, false, EncodingType.k4X);
         LiveWindow.addActuator("ShooterRetract", "shooterRetractPIDEncoder", shooterRetractPIDEncoder);
         
+        
         chassisPIDultrasonicSensor = new Ultrasonic(11, 12);
         LiveWindow.addSensor("ChassisPID", "ultrasonicSensor", chassisPIDultrasonicSensor);
+        
         
         intakeLeftBallSensor = new DigitalInput(8);
         LiveWindow.addSensor("Intake", "ballSensor", intakeLeftBallSensor);
@@ -214,7 +218,6 @@ public class RobotMap {
         LiveWindow.addSensor("Intake", "ballSensor", intakeGotBallSensor);
         
    
-        
         chassisDrive = new RobotDrive(chassisPIDchassisLeft1, chassisPIDchassisRight1);
     	chassisDrive.setMaxOutput(1.0);
     	chassisDrive.setSensitivity(0.5);

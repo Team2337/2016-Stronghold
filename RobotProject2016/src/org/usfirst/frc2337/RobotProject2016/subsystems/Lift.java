@@ -2,8 +2,8 @@
 
 package org.usfirst.frc2337.RobotProject2016.subsystems;
 
-import org.usfirst.frc2337.RobotProject.RobotMap;
-import org.usfirst.frc2337.RobotProject.commands.*;
+import org.usfirst.frc2337.RobotProject2016.RobotMap;
+import org.usfirst.frc2337.RobotProject2016.commands.*;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
