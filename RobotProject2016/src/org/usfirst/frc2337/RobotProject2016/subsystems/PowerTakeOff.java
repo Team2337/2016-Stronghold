@@ -32,8 +32,17 @@ public class PowerTakeOff extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
     
-    public void LiftOn(Value ptoState) {
+    public void setPTO(Value ptoState) {
     	ptoSolenoid.set(ptoState);
     }
+    
+    public void LiftOn() {
+    	ptoSolenoid.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public void LiftOff() {
+    	ptoSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
+  
 }
 

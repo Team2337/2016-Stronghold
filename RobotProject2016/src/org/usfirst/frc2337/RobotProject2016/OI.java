@@ -220,10 +220,7 @@ public class OI {
         SmartDashboard.putData("led_DoNothing", new led_DoNothing());
         SmartDashboard.putData("shooterArm_DoNothing", new shooterArm_DoNothing());
         SmartDashboard.putData("scaler_DoNothing", new scaler_DoNothing());
-        SmartDashboard.putData("intake_ActivateLifterMotor", new intake_ActivateLifterMotor(1));
         SmartDashboard.putData("intakeWrist_Activate", new intakeWrist_Extend());
-        SmartDashboard.putData("chassisShifter_activate: activate", new chassisShifter_activate(false));
-        SmartDashboard.putData("chassisShifter_activate: fish", new chassisShifter_activate(false));
         SmartDashboard.putData("camera_DoNothing", new camera_DoNothing());
         SmartDashboard.putData("intake_Inhale", new intake_Inhale());
         SmartDashboard.putData("intake_Exhale", new intake_Exhale());
@@ -238,7 +235,7 @@ public class OI {
       SmartDashboard.putBoolean(	"Ball Left", 			RobotMap.leftBallSensorState);
       SmartDashboard.putBoolean(	"Ball Right", 			RobotMap.rightBallSensorState);
       SmartDashboard.putBoolean(	"Got Ball", 			RobotMap.gotBallSensorState);
-      SmartDashboard.putBoolean(	"Retractor", 			RobotMap.shooterRetractPrimed);
+      SmartDashboard.putBoolean(	"Retractor", 			RobotMap.shooterRetractorPrimed);
       
       SmartDashboard.putDouble("Encoder distance" , RobotMap.chassisPIDLeftEncoder.getRate());
       SmartDashboard.putNumber("Encoder distance" , RobotMap.chassisPIDLeftEncoder.getDistance());
@@ -268,7 +265,7 @@ public class OI {
         SmartDashboard.putBoolean(	"Ball Left", 			RobotMap.leftBallSensorState);
         SmartDashboard.putBoolean(	"Ball Right", 			RobotMap.rightBallSensorState);
         SmartDashboard.putBoolean(	"Got Ball", 			RobotMap.gotBallSensorState);
-        SmartDashboard.putBoolean(	"Retractor", 			RobotMap.shooterRetractPrimed);
+        SmartDashboard.putBoolean(	"Retractor", 			RobotMap.shooterRetractorPrimed);
 
         
      }
