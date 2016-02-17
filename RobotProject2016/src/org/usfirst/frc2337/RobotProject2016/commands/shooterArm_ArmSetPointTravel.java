@@ -6,17 +6,17 @@ import org.usfirst.frc2337.RobotProject2016.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class shooterArm_ArmSetPointScale extends Command {
-
+public class shooterArm_ArmSetPointTravel extends Command {
 	
-	public shooterArm_ArmSetPointScale() {
+	
+	public shooterArm_ArmSetPointTravel() {
 		requires(Robot.shooterArmPID);	
 	}
 
 	
 	protected void initialize() {
 		RobotMap.shooterArmOnTarget = false;
-		Robot.shooterArmPID.setSetpoint(Robot.shooterArmPID.scale);
+		Robot.shooterArmPID.setSetpoint(Robot.shooterArmPID.travel);
 	}
 	
 	
@@ -26,7 +26,7 @@ public class shooterArm_ArmSetPointScale extends Command {
 
 	protected boolean isFinished() {
 		if( Robot.shooterArmPID.onTarget() )
-			{RobotMap.shooterArmOnTarget = true;
+			{RobotMap.shooterArmOnTarget = false;   // so can't shoot....DO WE WANT THIS???
 			return true;}
 	return false;
 	}
@@ -39,4 +39,5 @@ public class shooterArm_ArmSetPointScale extends Command {
 	protected void interrupted() {
 		this.end();	
 	}
+
 }

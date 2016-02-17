@@ -21,11 +21,12 @@ public class ShooterArmPID extends PIDSubsystem {
     
     //  Encoder = 1, POT = 2;
     private double encoderPotChooser = 1;
-    private double layupShot;
-    private double hookShot;
+    
+    public double base, travel, layupShot, hookShot, scale;
+    
     private final double setPointTolerance = 0.05;
-    private final double autonMaxArmSpeedUp = .2;
-    private final double autonMaxArmSpeedDown = -.2;
+    public final double autonMaxArmSpeedUp = .2;
+    public final double autonMaxArmSpeedDown = -.2;
     public final double teleopArmSpeedUp = .2;
     public final double teleopArmSpeedDown = -.2;
     public final double armToplimit = 4;
@@ -35,8 +36,6 @@ public class ShooterArmPID extends PIDSubsystem {
     public boolean armjoystickstatus = true;
     
     boolean PIDStatus = false;
-    //Joystick mode for switching back motor and lift
-    public boolean joystickStatus = true;
     
     
     // Initialize your subsystem here
@@ -52,12 +51,18 @@ public class ShooterArmPID extends PIDSubsystem {
 
         if(encoderPotChooser == 1){
         	//Specified angle value for Pot
+        	scale = 5;
         	layupShot = 4;
         	hookShot = 3;
+        	travel = 2;
+        	base = 1;
         }else {
         	//Specified angle value for encoder
+        	scale = 120;
         	layupShot = 100;
         	hookShot = 80;
+        	travel = 50;
+        	base = 10;
         }
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
@@ -109,28 +114,13 @@ public class ShooterArmPID extends PIDSubsystem {
     	shooterArmMotor.set(teleopArmSpeedDown); 	
     }
     /**
-     * positions shooter arm for Layup shot using layupShot variable declared towards the top of the ShooterArm
-     * Subsystem
-     * 
-     */
-    public void shooterLayup() {
-    	shooterArmMotor.setSetpoint(layupShot);
-    	}
-    /**
-     * positions shooter arm for hook shot using hookShot variable declared towards the top of the ShooterArm
-     * Subsystem
-     */
-    public void shooterHookShot() {
-    	shooterArmMotor.setSetpoint(hookShot);
-    	}
-    /**
      * stops the shooter arm motor(s)
      */
     public void stopMotors() {
     	shooterArmMotor.set(0);
     }
     /**
-     * Disables the PID subsystem on the arm.
+     * Disables the PID subsystem on the arm....DO WE NEED???
      */
     public void stopPID(){
     	this.PIDStatus = true;
@@ -150,12 +140,5 @@ public class ShooterArmPID extends PIDSubsystem {
     public boolean getPIDStatus(){
     	return this.PIDStatus;
     }
-    /**
-     * Returns the status of the operator station button to determine whether the joystick Y axis controls the lift or the back arm.
-     * @return true or false.......... not used???
-     */
-    
-    public boolean joystickModeStatus() {
-    	return this.joystickStatus;
-    }
+
 }
