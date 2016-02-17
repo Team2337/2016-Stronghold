@@ -12,32 +12,31 @@ public class shooter_Shoot extends Command {
 	}
 	protected void initialize() {
 		// Disengages the shooter pin
-		if(Robot.intakeWrist.getIntakeWristStatus() && RobotMap.okToShoot && RobotMap.shooterRetractPrimed)
-			Robot.shooter.shooterShoot();
+		if(Robot.intakeWrist.getIntakeWristStatus() 
+				&& RobotMap.okToShoot 
+				//&& RobotMap.shooterArmOnTarget
+				//&& RobotMap.visionOnTarget
+				&& RobotMap.shooterRetractorPrimed
+				&& RobotMap.shooterRetractorRetracted
+				&& RobotMap.shooterRetractorRetracted)
+			Robot.shooter.shooterShoot();	
+		
 	}
-
 
 	protected void execute() {
-		// TODO Auto-generated method stub
 		
 	}
-
 
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
-
 
 	protected void end() {
-		// TODO Auto-generated method stub
-		
+		RobotMap.okToShoot = false;
 	}
 
-
 	protected void interrupted() {
-		// TODO Auto-generated method stub
-		
+		this.end();
 	}
 
 }

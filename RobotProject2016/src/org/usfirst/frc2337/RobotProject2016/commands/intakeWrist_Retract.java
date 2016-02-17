@@ -1,46 +1,40 @@
 
-
 package org.usfirst.frc2337.RobotProject2016.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc2337.RobotProject2016.Robot;
-import org.usfirst.frc2337.RobotProject2016.RobotMap;
 
 /**
- *  
+ *
  */
-public class intake_Exhale extends Command {
+public class intakeWrist_Retract extends Command {
 
-    public intake_Exhale() {
-
-        requires(Robot.intake);
+    public intakeWrist_Retract() {
+    	requires(Robot.intakeWrist);
 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.intakeWrist.intakeRetract();
     }
-
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.intakeExhale();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	RobotMap.okToShoot = false;
-    	Robot.intake.stopMotors();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	this.end();
     }
 }

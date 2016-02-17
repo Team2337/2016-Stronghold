@@ -1,5 +1,4 @@
 
-
 package org.usfirst.frc2337.RobotProject2016.subsystems;
 
 import org.usfirst.frc2337.RobotProject2016.RobotMap;
@@ -18,7 +17,7 @@ public class IntakeWrist extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        setDefaultCommand(new intakeWrist_Activate());
+        setDefaultCommand(new intakeWrist_Extend());
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }

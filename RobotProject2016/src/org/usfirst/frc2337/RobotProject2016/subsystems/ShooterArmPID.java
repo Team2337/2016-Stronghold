@@ -3,12 +3,12 @@ package org.usfirst.frc2337.RobotProject2016.subsystems;
 
 import org.usfirst.frc2337.RobotProject2016.RobotMap;
 import org.usfirst.frc2337.RobotProject2016.commands.*;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CANTalon;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CANTalon;
 
 /**
  *
@@ -21,39 +21,48 @@ public class ShooterArmPID extends PIDSubsystem {
     
     //  Encoder = 1, POT = 2;
     private double encoderPotChooser = 1;
-    private double layupShot;
-    private double hookShot;
+    
+    public double base, travel, layupShot, hookShot, scale;
+    
     private final double setPointTolerance = 0.05;
-    private final double autonArmSpeedUp = .2;
-    private final double autonArmSpeedDown = -.2;
-    private final double teleopArmSpeedUp = .2;
-    private final double teleopArmSpeedDown = -.2;
-    private final double armToplimit = 4;
-    private final double armBottomlimit = 0;
+    public final double autonMaxArmSpeedUp = .2;
+    public final double autonMaxArmSpeedDown = -.2;
+    public final double teleopArmSpeedUp = .2;
+    public final double teleopArmSpeedDown = -.2;
+    public final double armToplimit = 4;
+    public final double armBottomlimit = 0;
     
     public boolean armPIDstatus = false;
     public boolean armjoystickstatus = true;
+    
+    boolean PIDStatus = false;
     
     
     // Initialize your subsystem here
     public ShooterArmPID() {
        
         super("ShooterArmPID", 1.0, 0.0, 0.0);
-        setAbsoluteTolerance(0.2);
+        setAbsoluteTolerance(setPointTolerance);
         getPIDController().setContinuous(false);
         LiveWindow.addActuator("ShooterArmPID", "PIDSubsystem Controller", getPIDController());
 
-        getPIDController().setOutputRange(autonArmSpeedDown, autonArmSpeedUp);
+        getPIDController().setOutputRange(autonMaxArmSpeedDown, autonMaxArmSpeedUp);
         getPIDController().setInputRange(armBottomlimit, armToplimit);
 
         if(encoderPotChooser == 1){
         	//Specified angle value for Pot
+        	scale = 5;
         	layupShot = 4;
         	hookShot = 3;
+        	travel = 2;
+        	base = 1;
         }else {
         	//Specified angle value for encoder
+        	scale = 120;
         	layupShot = 100;
         	hookShot = 80;
+        	travel = 50;
+        	base = 10;
         }
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
@@ -62,7 +71,8 @@ public class ShooterArmPID extends PIDSubsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new shooterArm_DoNothing());
+        setDefaultCommand(new shooterArm_JoystickControl());
+        
     }
 
     protected double returnPIDInput() {
@@ -104,21 +114,31 @@ public class ShooterArmPID extends PIDSubsystem {
     	shooterArmMotor.set(teleopArmSpeedDown); 	
     }
     /**
-     * positions shooter arm for Layup shot using layupShot variable declared towards the top of the ShooterArm
-     * Subsystem
-     * 
+     * stops the shooter arm motor(s)
      */
-    public void shooterLayup() {
-    	shooterArmMotor.setSetpoint(layupShot);
-    	}
-    /**
-     * positions shooter arm for hook shot using hookShot variable declared towards the top of the ShooterArm
-     * Subsystem
-     */
-    public void shooterHookShot() {
-    	shooterArmMotor.setSetpoint(hookShot);
-    	}
     public void stopMotors() {
     	shooterArmMotor.set(0);
     }
+    /**
+     * Disables the PID subsystem on the arm....DO WE NEED???
+     */
+    public void stopPID(){
+    	this.PIDStatus = true;
+    	this.disable();
+    }
+    /**
+     * Enables the PID subsystem on the arm.
+     */
+    public void startPID() {
+    	this.PIDStatus = false;
+    	this.enable();
+    }
+    /**
+     * Returns the status of the arm's PID subsystem to determine whether it is enabled.
+     * @return true or false
+     */
+    public boolean getPIDStatus(){
+    	return this.PIDStatus;
+    }
+
 }
