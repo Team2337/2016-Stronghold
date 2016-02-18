@@ -62,6 +62,7 @@ public class RobotMap {
 	public static Encoder shooterRetractPIDEncoder;
     
     public static NetworkTable gripTables;
+    public static NetworkTable autonTables;
     
     public static PowerDistributionPanel chassisPIDpowerDistributionPanel;
     
@@ -93,7 +94,7 @@ public class RobotMap {
     
     //Start of init
     public static void init() {
-    	
+    	autonTables = NetworkTable.getTable("Auton");
     	
     	
     	chassisPIDaccelerometer = new AnalogAccelerometer(1);

@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class shooter_Shoot extends Command {
 
 	public shooter_Shoot(){
-		requires(Robot.shooter);
+		requires(Robot.shooterRetract);
 	}
 	protected void initialize() {
 		// Disengages the shooter pin
 		if(Robot.intakeWrist.getIntakeWristStatus() && RobotMap.okToShoot && RobotMap.shooterRetractPrimed)
-			Robot.shooter.shooterShoot();
+		{}
 	}
 
 

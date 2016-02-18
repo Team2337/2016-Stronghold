@@ -10,7 +10,7 @@ public class shooterRetract_SetSetpoint extends Command {
 		requires(Robot.shooterRetract);
 	}
 	protected void initialize() {
-		m_target = Robot.prefsShooterRetract.getDouble("ShooterRetractSetPoint", 5.0);
+		m_target = Robot.prefs.getDouble("ShooterRetractSetPoint", 5.0);
 		Robot.shooterRetract.setRetractPosition(m_target);
 	}
 
